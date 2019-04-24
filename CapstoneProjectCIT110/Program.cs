@@ -85,9 +85,10 @@ namespace CapstoneProjectCIT110
                 DisplayHeader("Main Menu");
 
                 //Menu Options
-                Console.WriteLine("1) View Account ");
+                Console.WriteLine("1) View Account");
                 Console.WriteLine("2) Withdraw Money");
-                Console.WriteLine("3)  ");
+                Console.WriteLine("3) Deposit Money");
+                Console.WriteLine("4) Calculate Intrest");
                 Console.WriteLine("E) Exit");
                 Console.WriteLine();
                 Console.Write("Enter Menu Choice:");
@@ -106,7 +107,13 @@ namespace CapstoneProjectCIT110
                         break;
 
                     case "3":
+                        savingsBalance = DisplayDepositeSavings(savingsBalance);
+                        checkingBalance = DisplayDepositeCheckings(checkingBalance);
+                        retirementFund = DisplayDepositeRetirement(retirementFund);
+                        break;
 
+                    case "4":
+                        DisplayCalculateIntrest(savingsBalance, checkingBalance, retirementFund);
                         break;
 
                     case "e":
@@ -122,6 +129,138 @@ namespace CapstoneProjectCIT110
                 }
             }
 
+        }
+
+        static double DisplayDepositeRetirement(double retirementFund)
+        {
+            Console.Clear();
+            //variables
+            double newRetirementFund;
+            double deposite = 0;
+            bool validEntry;
+            string userResponse;
+
+            validEntry = false;
+
+            DisplayHeader("Retirement Fund Information");
+            Console.WriteLine();
+            Console.WriteLine($"Retirement Fund: ${retirementFund}");
+
+            //Ask User and Validate
+            while (!validEntry)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the amount you would like to Deposite: ");
+                userResponse = Console.ReadLine();
+
+                if (!double.TryParse(userResponse, out deposite))
+                {
+                    Console.WriteLine("Please enter a numerical balance");
+                }
+                else if (deposite < 0)
+                {
+                    Console.WriteLine("Please enter an amount 0 or greater");
+                }
+                else
+                {
+                    Console.WriteLine($"${deposite} has been added to your Retirement Fund");
+                    Console.WriteLine();
+                    validEntry = true;
+                    DisplayContinuePrompt();
+                }
+            }
+
+            newRetirementFund = retirementFund + deposite;
+
+            return newRetirementFund;
+        }
+
+        static double DisplayDepositeCheckings(double checkingBalance)
+        {
+            Console.Clear();
+            //variables
+            double newCheckingBalance;
+            double deposite = 0;
+            bool validEntry;
+            string userResponse;
+
+            validEntry = false;
+
+            DisplayHeader("Checking Account Information");
+            Console.WriteLine();
+            Console.WriteLine($"Checking Balance: ${checkingBalance}");
+
+            //Ask User and Validate
+            while (!validEntry)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the amount you would like to Deposite: ");
+                userResponse = Console.ReadLine();
+
+                if (!double.TryParse(userResponse, out deposite))
+                {
+                    Console.WriteLine("Please enter a numerical balance");
+                }
+                else if (deposite < 0)
+                {
+                    Console.WriteLine("Please enter an amount 0 or greater");
+                }
+                else
+                {
+                    Console.WriteLine($"${deposite} has been added to your Checking Account");
+                    Console.WriteLine();
+                    validEntry = true;
+                    DisplayContinuePrompt();
+                }
+            }
+
+            newCheckingBalance = checkingBalance + deposite;
+
+            return newCheckingBalance;
+        }
+
+        static double DisplayDepositeSavings(double savingsBalance)
+        {
+            Console.Clear();
+            //variables
+            double newSavingsBalance;
+            double deposite = 0;
+            bool validEntry;
+            string userResponse;
+
+            validEntry = false;
+
+            DisplayHeader("Saving Account Information");
+            Console.WriteLine();
+            Console.WriteLine($"Savings Balance: ${savingsBalance}");
+
+            //Ask User and Validate
+            while (!validEntry)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the amount you would like to Deposite: ");
+                userResponse = Console.ReadLine();
+
+                if (!double.TryParse(userResponse, out deposite))
+                {
+                    Console.WriteLine("Please enter a numerical balance");
+                }
+                else if (deposite < 0)
+                {
+                    Console.WriteLine("Please enter an amount 0 or greater");
+                }
+                else
+                {
+                    Console.WriteLine($"${deposite} has been added to your Savings Account");
+                    Console.WriteLine();
+                    validEntry = true;
+                    DisplayContinuePrompt();
+                }
+            }
+
+            newSavingsBalance = savingsBalance + deposite;
+
+            return newSavingsBalance;
         }
 
         static double DisplayWithdrawRetirementFund(double retirementFund)
@@ -152,7 +291,7 @@ namespace CapstoneProjectCIT110
                 }
                 else if (withdraw < 0)
                 {
-                    Console.WriteLine("Please enter a balance 0 or greater");
+                    Console.WriteLine("Please enter an amount 0 or greater");
                 }
                 else if (withdraw > retirementFund)
                 {
@@ -200,7 +339,7 @@ namespace CapstoneProjectCIT110
                 }
                 else if (withdraw < 0)
                 {
-                    Console.WriteLine("Please enter a balance 0 or greater");
+                    Console.WriteLine("Please enter an amount 0 or greater");
                 }
                 else if (withdraw > checkingBalance)
                 {
@@ -220,16 +359,15 @@ namespace CapstoneProjectCIT110
             return newCheckingBalance;
         }
 
-        static void DisplayWithdrawMoney(double savingsBalance, double checkingBalance, double retirementFund)
+        static void DisplayCalculateIntrest(double savingsBalance, double checkingBalance, double retirementFund)
         {
             //variables
             bool exiting = false;
             string menuChoice;
-            double newSavingsBalance;
 
             while (!exiting)
             {
-                DisplayHeader("Main Menu");
+                DisplayHeader("Calculate Interest");
 
                 //Menu Options
                 Console.WriteLine("1) Savings");
@@ -243,8 +381,7 @@ namespace CapstoneProjectCIT110
                 switch (menuChoice)
                 {
                     case "1":
-                        newSavingsBalance = DisplayWithdrawSavings(savingsBalance);
-                        savingsBalance = newSavingsBalance;
+                        DisplaySavingsInterest(savingsBalance);
                         break;
 
                     case "2":
@@ -268,7 +405,12 @@ namespace CapstoneProjectCIT110
                 }
             }
         }//DO NOT USE
-        
+
+        static void DisplaySavingsInterest(double savingsBalance)
+        {
+            Console.Clear();
+        }
+
         static double DisplayWithdrawSavings(double savingsBalance)
         {
             Console.Clear();
@@ -297,7 +439,7 @@ namespace CapstoneProjectCIT110
                 }
                 else if (withdraw < 0)
                 {
-                    Console.WriteLine("Please enter a balance 0 or greater");
+                    Console.WriteLine("Please enter an amount or greater");
                 }
                 else if (withdraw > savingsBalance)
                 {
