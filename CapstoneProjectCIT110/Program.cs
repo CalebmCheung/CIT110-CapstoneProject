@@ -30,6 +30,9 @@ namespace CapstoneProjectCIT110
             double checkingBalance;
             double retirementFund;
 
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+
             DisplayWelcomeScreen();
 
             savingsBalance = DisplayGetSavings();
@@ -385,11 +388,11 @@ namespace CapstoneProjectCIT110
                         break;
 
                     case "2":
-
+                        DisplayCheckingInterest(checkingBalance);
                         break;
 
                     case "3":
-
+                        DisplayRetirementInterest(retirementFund);
                         break;
 
                     case "e":
@@ -404,11 +407,250 @@ namespace CapstoneProjectCIT110
                         break;
                 }
             }
-        }//DO NOT USE
+        }
+
+        static void DisplayRetirementInterest(double retirementFund)
+        {
+            Console.Clear();
+            //Varaibles
+            double interestRate = 0;
+            double balanceAfterInterest = 0;
+            double appliedPercentage = 0;
+            double numberOfYears = 0;
+            bool validEntryRate;
+            bool validEntryYears;
+
+            validEntryRate = false;
+            validEntryYears = false;
+
+            DisplayHeader("Calculate Interest");
+            Console.WriteLine();
+            Console.WriteLine($"Retirement Fund: ${retirementFund}");
+
+            //Ask user for rate and validate
+            while (!validEntryRate)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the Interest Rate as a decimal number: ");
+
+                if (!double.TryParse(Console.ReadLine(), out interestRate))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a numerical rate");
+                }
+                else if (interestRate < 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a number above 0");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Interest Rate:{interestRate}");
+                    validEntryRate = true;
+                }
+            }
+
+            while (!validEntryYears)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the number of years this rate will apply: ");
+
+                if (!double.TryParse(Console.ReadLine(), out numberOfYears))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter the amount of years");
+                }
+                else if (numberOfYears < 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a number above 0");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Number of years:{numberOfYears}");
+                    validEntryYears = true;
+                }
+            }
+
+            balanceAfterInterest = retirementFund;
+
+            for (int index = 0; index < numberOfYears; index++)
+            {
+                appliedPercentage = balanceAfterInterest * interestRate;
+                balanceAfterInterest = balanceAfterInterest + appliedPercentage;
+            }
+
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine($"After {numberOfYears} years at a rate of {interestRate}% your Retirement Fund will have ${balanceAfterInterest}");
+            Console.WriteLine($"[Gained:${balanceAfterInterest - retirementFund}]");
+
+            DisplayContinuePrompt();
+        }
+
+        static void DisplayCheckingInterest(double checkingBalance)
+        {
+            Console.Clear();
+            //Varaibles
+            double interestRate = 0;
+            double balanceAfterInterest = 0;
+            double appliedPercentage = 0;
+            double numberOfYears = 0;
+            bool validEntryRate;
+            bool validEntryYears;
+
+            validEntryRate = false;
+            validEntryYears = false;
+
+            DisplayHeader("Calculate Interest");
+            Console.WriteLine();
+            Console.WriteLine($"Checking Balance: ${checkingBalance}");
+
+            //Ask user for rate and validate
+            while (!validEntryRate)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the Interest Rate as a decimal number: ");
+
+                if (!double.TryParse(Console.ReadLine(), out interestRate))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a numerical rate");
+                }
+                else if (interestRate < 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a number above 0");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Interest Rate:{interestRate}");
+                    validEntryRate = true;
+                }
+            }
+
+            while (!validEntryYears)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the number of years this rate will apply: ");
+
+                if (!double.TryParse(Console.ReadLine(), out numberOfYears))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter the amount of years");
+                }
+                else if (numberOfYears < 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a number above 0");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Number of years:{numberOfYears}");
+                    validEntryYears = true;
+                }
+            }
+
+            balanceAfterInterest = checkingBalance;
+
+            for (int index = 0; index < numberOfYears; index++)
+            {
+                appliedPercentage = balanceAfterInterest * interestRate;
+                balanceAfterInterest = balanceAfterInterest + appliedPercentage;
+            }
+
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine($"After {numberOfYears} years at a rate of {interestRate}% your Checking balance will be ${balanceAfterInterest}");
+            Console.WriteLine($"[Gained:${balanceAfterInterest - checkingBalance}]");
+
+            DisplayContinuePrompt();
+        }
 
         static void DisplaySavingsInterest(double savingsBalance)
         {
             Console.Clear();
+            //Varaibles
+            double interestRate = 0;
+            double balanceAfterInterest = 0;
+            double appliedPercentage = 0;
+            double numberOfYears = 0;
+            bool validEntryRate;
+            bool validEntryYears;
+
+            validEntryRate = false;
+            validEntryYears = false;
+
+            DisplayHeader("Calculate Interest");
+            Console.WriteLine();
+            Console.WriteLine($"Savings Balance: ${savingsBalance}");
+
+            //Ask user for rate and validate
+            while (!validEntryRate)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the Interest Rate as a decimal number: ");
+
+                if (!double.TryParse(Console.ReadLine(),out interestRate))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a numerical rate");
+                }
+                else if (interestRate < 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a number above 0");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Interest Rate:{interestRate}");
+                    validEntryRate = true;
+                }
+            }
+
+            while (!validEntryYears)
+            {
+                Console.WriteLine();
+                Console.Write("Please enter the number of years this rate will apply: ");
+
+                if (!double.TryParse(Console.ReadLine(), out numberOfYears))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter the amount of years");
+                }
+                else if (numberOfYears < 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a number above 0");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Number of years:{numberOfYears}");
+                    validEntryYears = true;
+                }
+            }
+
+            balanceAfterInterest = savingsBalance;
+
+            for (int index = 0; index < numberOfYears; index++)
+            {
+                appliedPercentage = balanceAfterInterest * interestRate;
+                balanceAfterInterest = balanceAfterInterest + appliedPercentage;
+            }
+
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine($"After {numberOfYears} years at a rate of {interestRate}% your Savings balance will be ${balanceAfterInterest}");
+            Console.WriteLine($"[Gained:${balanceAfterInterest - savingsBalance}]");
+
+            DisplayContinuePrompt();
+
         }
 
         static double DisplayWithdrawSavings(double savingsBalance)
@@ -439,7 +681,7 @@ namespace CapstoneProjectCIT110
                 }
                 else if (withdraw < 0)
                 {
-                    Console.WriteLine("Please enter an amount or greater");
+                    Console.WriteLine("Please enter an amount 0 or greater");
                 }
                 else if (withdraw > savingsBalance)
                 {
@@ -485,24 +727,28 @@ namespace CapstoneProjectCIT110
                 {
                     case "1":
                         Console.Clear();
+                        Console.WriteLine();
                         Console.WriteLine($"Savings Balance: ${savingsBalance}");
                         DisplayContinuePrompt();                     
                         break;
 
                     case "2":
                         Console.Clear();
+                        Console.WriteLine();
                         Console.WriteLine($"Checking Balance: ${checkingBalance}");
                         DisplayContinuePrompt();
                         break;
 
                     case "3":
                         Console.Clear();
+                        Console.WriteLine();
                         Console.WriteLine($"Retirement Balance: ${retirementFund}");
                         DisplayContinuePrompt();
                         break;
 
                     case "4":
                         Console.Clear();
+                        Console.WriteLine();
                         Console.WriteLine($"Savings Balance: ${savingsBalance}");
                         Console.WriteLine();
                         Console.WriteLine($"Checking Balance: ${checkingBalance}");
@@ -539,7 +785,7 @@ namespace CapstoneProjectCIT110
         {
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("\t\t\t\tWelcome to your personal bank account tracker.");
+            Console.WriteLine("\t\t\t\tWelcome to your personal Bank Account Tracker.");
             Console.WriteLine();
 
             DisplayContinuePrompt();
@@ -617,7 +863,7 @@ namespace CapstoneProjectCIT110
         static void DisplayContinuePrompt()
         {
             Console.WriteLine();
-            Console.WriteLine("Press any key to continue.");
+            Console.WriteLine("\t\t\t\t\tPress any key to continue.");
             Console.ReadKey();
         }
 
@@ -625,7 +871,7 @@ namespace CapstoneProjectCIT110
         {
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("\t\t\t\tThank you for using our Application");
+            Console.WriteLine("\t\t\t\tThank you for using The Bank Account Tracker");
             Console.WriteLine();
 
             DisplayContinuePrompt();
